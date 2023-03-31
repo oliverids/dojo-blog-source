@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import BlogList from './BlogList';
 
 const Home = () => {
   const [blogs, setBlogs] = useState([
@@ -7,17 +8,20 @@ const Home = () => {
     { title: 'Web dev top tips', body: 'lorem ipsum...', author: 'mario', id: 3 }
   ]);
 
+  const handleDelete = id => {
+    const newBlogs = blogs.filter(blog => blog.id !== id);
+    setBlogs(newBlogs);
+  };
+
+  //empty array only runs at the first render
+  //or could pass a variable as an argument and it's going to fire whenever the state of that variable changes
+  useEffect(() => {
+    console.log('it ran');
+  }, []);
+
   return (
     <div className="home">
-      <ul>
-        {blogs.map(blog => (
-          <li key={blog.id} className='blog-preview'>
-            <h2>{blog.title}</h2>
-            <p>{blog.author}</p>
-            {/* <p>{blog.body}</p> */}
-          </li>
-        ))}
-      </ul>
+      <BlogList blogs={blogs} handleDelete={handleDelete}/>
     </div>
   );
 };
