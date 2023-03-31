@@ -2,26 +2,22 @@ import { useEffect, useState } from 'react';
 import BlogList from './BlogList';
 
 const Home = () => {
-  const [blogs, setBlogs] = useState([
-    { title: 'My new website', body: 'lorem ipsum...', author: 'mario', id: 1 },
-    { title: 'Welcome party!', body: 'lorem ipsum...', author: 'yoshi', id: 2 },
-    { title: 'Web dev top tips', body: 'lorem ipsum...', author: 'mario', id: 3 }
-  ]);
+  const [blogs, setBlogs] = useState(null);
+  const [isPending, setisPending] = useState(true);
 
-  const handleDelete = id => {
-    const newBlogs = blogs.filter(blog => blog.id !== id);
-    setBlogs(newBlogs);
-  };
-
-  //empty array only runs at the first render
-  //or could pass a variable as an argument and it's going to fire whenever the state of that variable changes
   useEffect(() => {
-    console.log('it ran');
+    fetch('http://localhost:8000/blogs')
+      .then(r => r.json())
+      .then(data => {
+        setBlogs(data);
+        setisPending(false);
+      });
   }, []);
 
   return (
     <div className="home">
-      <BlogList blogs={blogs} handleDelete={handleDelete}/>
+      {isPending && <div>Loading...</div>}
+      {blogs && <BlogList blogs={blogs}/>}
     </div>
   );
 };

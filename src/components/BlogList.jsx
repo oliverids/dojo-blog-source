@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-const BlogList = ({ blogs, handleDelete }) => {
+const BlogList = ({ blogs }) => {
   BlogList.propTypes = {
     blogs: PropTypes.oneOfType([
       PropTypes.object,
@@ -15,7 +15,7 @@ const BlogList = ({ blogs, handleDelete }) => {
         <li key={blog.id} className='blog-preview'>
           <h2>{blog.title}</h2>
           <p>{blog.author}</p>
-          <button onClick={() => handleDelete(blog.id)}>Delete blog</button>
+          <button>Delete blog</button>
         </li>
       ))}
     </ul>
