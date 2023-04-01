@@ -50,7 +50,7 @@ ul {
   padding: 10px 16px;
   margin: 20px 0;
   border-bottom: 1px solid #fafafa;
-  cursor: pointer;
+  // cursor: pointer;
 
   &:not(:last-child) {
     margin-bottom: 2rem;
@@ -74,5 +74,6 @@ ul {
     color: #fff;
     border: none;
     border-radius: 4px;
+    cursor: pointer;
   }
 }
