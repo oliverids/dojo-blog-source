@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const BlogList = ({ blogs }) => {
   BlogList.propTypes = {
@@ -13,9 +14,11 @@ const BlogList = ({ blogs }) => {
     <ul>
       {blogs.map(blog => (
         <li key={blog.id} className='blog-preview'>
-          <h2>{blog.title}</h2>
-          <p>{blog.author}</p>
-          <button>Delete blog</button>
+          <Link to={`/blogs/${blog.id}`}>
+            <h2>{blog.title}</h2>
+            <p>{blog.author}</p>
+            {/* <button>Delete blog</button> */}
+          </Link>
         </li>
       ))}
     </ul>
